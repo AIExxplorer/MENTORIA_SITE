@@ -14,31 +14,47 @@
     <meta property="og:url" content="URL_DO_SEU_SITE_QUANDO_ESTIVER_ONLINE">
     <meta property="og:type" content="website">
 
-    <link rel="icon" href="logo.png" type="image/png">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="src/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="src/images/logo.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FF7A00">
+    <meta name="msapplication-TileColor" content="#FF7A00">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/css/style.css">
 
     <div id="particles-js"></div>
 
     <header>
         <div class="container">
             <a href="#" class="logo">
-                <img src="assets/images/logo.png" alt="Logo Foco Digital">
+                <img src="src/images/logo.png" alt="Logo Foco Digital">
             </a>
             <nav class="nav-links">
                 <a href="#servicos">Serviços</a>
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato" class="cta-button-outline">Contato</a>
             </nav>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
     <main>
         <section id="hero">
             <div class="container">
-                <div class="hero-content">
+                <div class="hero-content fade-in">
                     <h1>Transforme sua Presença Online. Gere Resultados Reais.</h1>
                     <p>Com a Foco Digital, seu sucesso é o nosso principal objetivo. Criamos estratégias de marketing e vendas que convertem visitantes em clientes.</p>
                     <a href="#contato" class="cta-button">Fale com um Especialista Agora</a>
@@ -49,17 +65,17 @@
 
         <section id="servicos">
             <div class="container">
-                <h2>Soluções Completas para seu Negócio Decolar</h2>
+                <h2 class="fade-in">Soluções Completas para seu Negócio Decolar</h2>
                 <div class="servicos-grid">
-                    <div class="servico-card">
+                    <div class="servico-card fade-in">
                         <h3>Gestão de Tráfego Pago</h3>
                         <p>Atraia clientes qualificados através de anúncios estratégicos no Google, Instagram e Facebook.</p>
                     </div>
-                    <div class="servico-card">
+                    <div class="servico-card fade-in">
                         <h3>Otimização SEO</h3>
                         <p>Colocamos seu site no topo das buscas do Google para que você seja encontrado de forma orgânica.</p>
                     </div>
-                    <div class="servico-card">
+                    <div class="servico-card fade-in">
                         <h3>Desenvolvimento de Sites</h3>
                         <p>Criamos landing pages e sites institucionais rápidos, responsivos e otimizados para conversão.</p>
                     </div>
@@ -69,14 +85,14 @@
 
         <section id="depoimentos">
             <div class="container">
-                <h2>Quem Confia, Recomenda</h2>
-                <div class="depoimento-card">
+                <h2 class="fade-in">Quem Confia, Recomenda</h2>
+                <div class="depoimento-card fade-in">
                     <blockquote>
                         "A parceria com a Foco Digital foi um divisor de águas para nossa empresa. Em 3 meses, nossas vendas online dobraram. Profissionalismo e resultados incríveis!"
                     </blockquote>
                     <cite>– João da Silva, CEO da Empresa Exemplo</cite>
                 </div>
-                 <div class="depoimento-card">
+                 <div class="depoimento-card fade-in">
                     <blockquote>
                         "Finalmente encontramos uma agência que entende do nosso negócio e entrega o que promete. Recomendo de olhos fechados!"
                     </blockquote>
@@ -87,16 +103,16 @@
 
         <section id="cta-final">
             <div class="container">
-                <h2>Pronto para Acelerar seu Crescimento?</h2>
-                <p>Vamos conversar sobre como a Foco Digital pode ajudar seu negócio a atingir o próximo nível.</p>
-                <a href="#contato" class="cta-button">Quero Vender Mais</a>
+                <h2 class="fade-in">Pronto para Acelerar seu Crescimento?</h2>
+                <p class="fade-in">Vamos conversar sobre como a Foco Digital pode ajudar seu negócio a atingir o próximo nível.</p>
+                <a href="#contato" class="cta-button fade-in">Quero Vender Mais</a>
             </div>
         </section>
     </main>
 
     <footer id="contato">
         <div class="container">
-            <img src="assets/images/logo.png" alt="Logo Foco Digital no rodapé" class="footer-logo">
+            <img src="src/images/logo.png" alt="Logo Foco Digital no rodapé" class="footer-logo">
             <p>Foco Digital - Estratégias que geram resultados.</p>
             <div class="contato-info">
                 <p>Email: <a href="mailto:contato@focodigital.com">contato@focodigital.com</a></p>
@@ -107,76 +123,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
-    <script>
-        window.addEventListener('load', () => {
-            tsParticles.load('particles-js', {
-                background: {
-                    color: {
-                        value: '#213649' // Cor de fundo principal do seu site
-                    },
-                    image: 'linear-gradient(135deg, #213649 0%, #2E4A69 100%)' // Gradiente do seu site
-                },
-                fullScreen: {
-                    enable: true,
-                    zIndex: -1 // Garante que fique no fundo
-                },
-                particles: {
-                    number: {
-                        value: 60, // Quantidade de partículas
-                        density: {
-                            enable: true,
-                        }
-                    },
-                    color: {
-                        value: "#ffffff" // Cor das partículas
-                    },
-                    shape: {
-                        type: "circle"
-                    },
-                    opacity: {
-                        value: 0.5
-                    },
-                    size: {
-                        value: 2 // Tamanho das partículas
-                    },
-                    links: { // Antigo 'line_linked'
-                        enable: true,
-                        distance: 150, // Distância para criar uma linha
-                        color: "#ffffff", // Cor da linha
-                        opacity: 0.4,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2, // Velocidade do movimento
-                        direction: "none",
-                        outModes: { // Antigo 'out_mode'
-                            default: "out"
-                        }
-                    }
-                },
-                interactivity: {
-                    events: {
-                        onHover: { // Antigo 'onhover'
-                            enable: true,
-                            mode: "repulse"
-                        },
-                        onClick: { // Antigo 'onclick'
-                            enable: true,
-                            mode: "push"
-                        }
-                    },
-                    modes: {
-                        repulse: {
-                            distance: 100
-                        },
-                        push: {
-                            quantity: 4 // Antigo 'particles_nb'
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="src/js/script.js"></script>
 </body>
 </html>
