@@ -1,0 +1,29 @@
+{
+  "name": "Foco Digital - Marketing Digital e Vendas",
+  "short_name": "Foco Digital",
+  "description": "Especialistas em marketing digital e vendas. Transforme sua presença online e gere resultados reais.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#213649",
+  "theme_color": "#FF7A00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "src/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "src/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "marketing", "productivity"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+} 
