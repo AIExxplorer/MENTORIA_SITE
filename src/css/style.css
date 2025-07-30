@@ -55,6 +55,65 @@ body {
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* --- BACKGROUND EFFECTS --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(83, 52, 131, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -2;
+    animation: backgroundShift 20s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, transparent 48%, rgba(255, 107, 53, 0.03) 50%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(0, 212, 170, 0.03) 50%, transparent 52%);
+    background-size: 60px 60px, 60px 60px;
+    background-position: 0 0, 30px 30px;
+    pointer-events: none;
+    z-index: -1;
+    animation: patternMove 30s linear infinite;
+}
+
+@keyframes backgroundShift {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    33% {
+        transform: scale(1.1) rotate(1deg);
+        opacity: 0.8;
+    }
+    66% {
+        transform: scale(0.9) rotate(-1deg);
+        opacity: 1.2;
+    }
+}
+
+@keyframes patternMove {
+    0% {
+        background-position: 0 0, 30px 30px;
+    }
+    100% {
+        background-position: 60px 60px, 90px 90px;
+    }
 }
 
 .container {
@@ -70,12 +129,79 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: -1;
+    z-index: -3;
     pointer-events: none;
     background: var(--gradient-secondary);
 }
 
-/* --- ANIMAÇÃO FADE-IN --- */
+/* --- ANIMATED GRADIENT BACKGROUNDS --- */
+.gradient-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        var(--laranja-destaque),
+        var(--verde-accent),
+        var(--roxo-claro),
+        var(--laranja-secundario),
+        var(--laranja-destaque)
+    );
+    animation: rotateGradient 10s linear infinite;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+@keyframes rotateGradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- GEOMETRIC SHAPES BACKGROUND --- */
+.geometric-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.geometric-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        polygon(0% 0%, 100% 0%, 100% 25%, 0% 25%),
+        polygon(0% 75%, 100% 75%, 100% 100%, 0% 100%);
+    background-size: 100px 100px;
+    background-repeat: repeat-x;
+    opacity: 0.05;
+    z-index: -1;
+    animation: geometricSlide 15s linear infinite;
+}
+
+@keyframes geometricSlide {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(100px);
+    }
+}
+
+/* --- ANIMATION FADE-IN --- */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -142,6 +268,33 @@ header {
     z-index: 1000;
     transition: all 0.3s ease;
     box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 107, 53, 0.05) 25%, 
+        rgba(0, 212, 170, 0.05) 50%, 
+        rgba(83, 52, 131, 0.05) 75%, 
+        transparent 100%);
+    animation: headerShimmer 8s ease-in-out infinite;
+}
+
+@keyframes headerShimmer {
+    0%, 100% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
 }
 
 [data-theme="dark"] header {
@@ -152,6 +305,8 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .logo img {
@@ -279,6 +434,36 @@ header .container {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 212, 170, 0.2) 0%, transparent 50%);
+    animation: heroGlow 15s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
@@ -291,6 +476,31 @@ header .container {
     background-clip: text;
     line-height: 1.2;
     text-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    position: relative;
+}
+
+.hero-content h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    animation: titleUnderline 3s ease-in-out infinite;
+}
+
+@keyframes titleUnderline {
+    0%, 100% {
+        width: 100px;
+        opacity: 1;
+    }
+    50% {
+        width: 150px;
+        opacity: 0.7;
+    }
 }
 
 .hero-content p {
@@ -362,6 +572,30 @@ header .container {
     background: linear-gradient(to bottom, var(--bg-primary), transparent);
 }
 
+#servicos::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 49%, rgba(255, 107, 53, 0.03) 50%, transparent 51%),
+        linear-gradient(-45deg, transparent 49%, rgba(0, 212, 170, 0.03) 50%, transparent 51%);
+    background-size: 40px 40px;
+    animation: servicesPattern 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes servicesPattern {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px;
+    }
+}
+
 #servicos h2 {
     text-align: center;
     font-size: 3rem;
@@ -371,6 +605,8 @@ header .container {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    z-index: 1;
 }
 
 .servicos-grid {
@@ -378,6 +614,8 @@ header .container {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 40px;
     margin-top: 60px;
+    position: relative;
+    z-index: 1;
 }
 
 .servico-card {
@@ -403,8 +641,27 @@ header .container {
     transition: transform 0.3s ease;
 }
 
+.servico-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(255, 107, 53, 0.05) 0%, 
+        rgba(0, 212, 170, 0.05) 50%, 
+        rgba(83, 52, 131, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
 .servico-card:hover::before {
     transform: scaleX(1);
+}
+
+.servico-card:hover::after {
+    opacity: 1;
 }
 
 .servico-card:hover {
@@ -442,6 +699,30 @@ header .container {
     background: linear-gradient(to bottom, var(--bg-secondary), transparent);
 }
 
+#depoimentos::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
+    animation: testimonialsGlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes testimonialsGlow {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
 #depoimentos h2 {
     text-align: center;
     font-size: 3rem;
@@ -451,6 +732,8 @@ header .container {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    z-index: 1;
 }
 
 .testimonials-carousel {
@@ -460,6 +743,8 @@ header .container {
     overflow: hidden;
     border-radius: 20px;
     box-shadow: var(--shadow);
+    position: relative;
+    z-index: 1;
 }
 
 .testimonials-container {
@@ -588,6 +873,29 @@ header .container {
     opacity: 0.3;
 }
 
+#cta-final::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%),
+        linear-gradient(-45deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%);
+    background-size: 60px 60px;
+    animation: ctaPattern 15s linear infinite;
+}
+
+@keyframes ctaPattern {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
 #cta-final .container {
     position: relative;
     z-index: 1;
@@ -616,11 +924,34 @@ footer {
     position: relative;
 }
 
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.03) 25%, transparent 50%, rgba(0, 212, 170, 0.03) 75%, transparent 100%);
+    animation: footerShimmer 10s ease-in-out infinite;
+}
+
+@keyframes footerShimmer {
+    0%, 100% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+}
+
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-section h3 {
@@ -692,6 +1023,8 @@ footer {
     text-align: center;
     padding-top: 30px;
     border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
 }
 
 .copyright {

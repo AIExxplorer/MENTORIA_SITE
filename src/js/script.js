@@ -235,7 +235,7 @@ const initializeParticles = () => {
     },
     fullScreen: {
       enable: true,
-      zIndex: -1
+      zIndex: -3
     },
     particles: {
       number: {
@@ -448,6 +448,137 @@ const initializePulseAnimation = () => {
   });
 };
 
+// Add dynamic background effects
+const initializeDynamicBackgrounds = () => {
+  // Add mouse tracking effect to hero section
+  const hero = document.getElementById('hero');
+  
+  if (hero) {
+    hero.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      const x = (clientX / innerWidth - 0.5) * 20;
+      const y = (clientY / innerHeight - 0.5) * 20;
+      
+      hero.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+    
+    hero.addEventListener('mouseleave', () => {
+      hero.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    });
+  }
+
+  // Add scroll-triggered background effects
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      
+      if (sectionTop < window.innerHeight && sectionTop + sectionHeight > 0) {
+        const progress = (window.innerHeight - sectionTop) / (window.innerHeight + sectionHeight);
+        section.style.setProperty('--scroll-progress', progress);
+      }
+    });
+  });
+};
+
+// Add gradient animation effects
+const initializeGradientEffects = () => {
+  // Create animated gradient overlays
+  const gradientSections = document.querySelectorAll('.gradient-bg');
+  
+  gradientSections.forEach(section => {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, 
+        rgba(255, 107, 53, 0.1) 0%, 
+        rgba(0, 212, 170, 0.1) 25%, 
+        rgba(83, 52, 131, 0.1) 50%, 
+        rgba(255, 142, 83, 0.1) 75%, 
+        rgba(255, 107, 53, 0.1) 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      pointer-events: none;
+      z-index: 0;
+    `;
+    
+    section.style.position = 'relative';
+    section.appendChild(overlay);
+    
+    // Ensure content stays above overlay
+    const content = section.querySelector('.container');
+    if (content) {
+      content.style.position = 'relative';
+      content.style.zIndex = '1';
+    }
+  });
+  
+  // Add gradient shift animation
+  const gradientStyle = document.createElement('style');
+  gradientStyle.textContent = `
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  `;
+  document.head.appendChild(gradientStyle);
+};
+
+// Add geometric pattern animation
+const initializeGeometricEffects = () => {
+  const geometricSections = document.querySelectorAll('.geometric-bg');
+  
+  geometricSections.forEach(section => {
+    // Add floating geometric shapes
+    for (let i = 0; i < 5; i++) {
+      const shape = document.createElement('div');
+      shape.style.cssText = `
+        position: absolute;
+        width: ${20 + i * 10}px;
+        height: ${20 + i * 10}px;
+        background: ${i % 2 === 0 ? 'rgba(255, 107, 53, 0.1)' : 'rgba(0, 212, 170, 0.1)'};
+        border-radius: ${i % 2 === 0 ? '50%' : '0'};
+        animation: floatShape ${3 + i}s ease-in-out infinite;
+        animation-delay: ${i * 0.5}s;
+        pointer-events: none;
+        z-index: 0;
+      `;
+      
+      shape.style.left = `${Math.random() * 100}%`;
+      shape.style.top = `${Math.random() * 100}%`;
+      
+      section.appendChild(shape);
+    }
+  });
+  
+  // Add floating shape animation
+  const shapeStyle = document.createElement('style');
+  shapeStyle.textContent = `
+    @keyframes floatShape {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.3;
+      }
+      50% { 
+        transform: translateY(-20px) rotate(180deg); 
+        opacity: 0.7;
+      }
+    }
+  `;
+  document.head.appendChild(shapeStyle);
+};
+
 // Main initialization function
 const initializeApp = () => {
   addFloatingCSS();
@@ -460,6 +591,9 @@ const initializeApp = () => {
   initializeParallaxEffect();
   initializeFloatingAnimation();
   initializePulseAnimation();
+  initializeDynamicBackgrounds();
+  initializeGradientEffects();
+  initializeGeometricEffects();
 };
 
 // Initialize when DOM is ready
