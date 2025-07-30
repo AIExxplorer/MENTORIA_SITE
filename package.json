@@ -77,7 +77,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "tsparticles": "^2.9.3"
+    "tsparticles": "^3.8.1"
   },
   "browserslist": [
     "> 1%",
