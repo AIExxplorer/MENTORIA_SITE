@@ -58,7 +58,7 @@ body {
     position: relative;
 }
 
-/* --- BACKGROUND EFFECTS --- */
+/* --- HIGH-TECH BACKGROUND EFFECTS --- */
 body::before {
     content: '';
     position: fixed;
@@ -67,12 +67,12 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 40% 40%, rgba(83, 52, 131, 0.05) 0%, transparent 50%);
     pointer-events: none;
     z-index: -2;
-    animation: backgroundShift 20s ease-in-out infinite;
+    animation: techGlow 15s ease-in-out infinite;
 }
 
 body::after {
@@ -83,36 +83,32 @@ body::after {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(45deg, transparent 48%, rgba(255, 107, 53, 0.03) 50%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, rgba(0, 212, 170, 0.03) 50%, transparent 52%);
-    background-size: 60px 60px, 60px 60px;
-    background-position: 0 0, 30px 30px;
+        linear-gradient(90deg, transparent 49%, rgba(255, 107, 53, 0.02) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(0, 212, 170, 0.02) 50%, transparent 51%);
+    background-size: 100px 100px, 100px 100px;
+    background-position: 0 0, 50px 50px;
     pointer-events: none;
     z-index: -1;
-    animation: patternMove 30s linear infinite;
+    animation: techGrid 20s linear infinite;
 }
 
-@keyframes backgroundShift {
+@keyframes techGlow {
     0%, 100% {
-        transform: scale(1) rotate(0deg);
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
         opacity: 1;
-    }
-    33% {
-        transform: scale(1.1) rotate(1deg);
-        opacity: 0.8;
-    }
-    66% {
-        transform: scale(0.9) rotate(-1deg);
-        opacity: 1.2;
+        transform: scale(1.05);
     }
 }
 
-@keyframes patternMove {
+@keyframes techGrid {
     0% {
-        background-position: 0 0, 30px 30px;
+        background-position: 0 0, 50px 50px;
     }
     100% {
-        background-position: 60px 60px, 90px 90px;
+        background-position: 100px 100px, 150px 150px;
     }
 }
 
@@ -134,7 +130,7 @@ body::after {
     background: var(--gradient-secondary);
 }
 
-/* --- ANIMATED GRADIENT BACKGROUNDS --- */
+/* --- HIGH-TECH GRADIENT BACKGROUNDS --- */
 .gradient-bg {
     position: relative;
     overflow: hidden;
@@ -147,20 +143,21 @@ body::after {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        var(--laranja-destaque),
-        var(--verde-accent),
-        var(--roxo-claro),
-        var(--laranja-secundario),
-        var(--laranja-destaque)
-    );
-    animation: rotateGradient 10s linear infinite;
-    opacity: 0.1;
+    background: 
+        conic-gradient(
+            from 0deg,
+            var(--laranja-destaque),
+            var(--verde-accent),
+            var(--roxo-claro),
+            var(--laranja-secundario),
+            var(--laranja-destaque)
+        );
+    animation: techRotate 12s linear infinite;
+    opacity: 0.08;
     z-index: -1;
 }
 
-@keyframes rotateGradient {
+@keyframes techRotate {
     0% {
         transform: rotate(0deg);
     }
@@ -169,13 +166,13 @@ body::after {
     }
 }
 
-/* --- GEOMETRIC SHAPES BACKGROUND --- */
-.geometric-bg {
+/* --- HIGH-TECH SECTION BACKGROUNDS --- */
+.tech-bg {
     position: relative;
     overflow: hidden;
 }
 
-.geometric-bg::before {
+.tech-bg::before {
     content: '';
     position: absolute;
     top: 0;
@@ -183,21 +180,21 @@ body::after {
     width: 100%;
     height: 100%;
     background: 
-        polygon(0% 0%, 100% 0%, 100% 25%, 0% 25%),
-        polygon(0% 75%, 100% 75%, 100% 100%, 0% 100%);
-    background-size: 100px 100px;
-    background-repeat: repeat-x;
-    opacity: 0.05;
+        linear-gradient(90deg, transparent 49%, rgba(255, 107, 53, 0.03) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(0, 212, 170, 0.03) 50%, transparent 51%);
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    opacity: 0.3;
     z-index: -1;
-    animation: geometricSlide 15s linear infinite;
+    animation: techPattern 25s linear infinite;
 }
 
-@keyframes geometricSlide {
+@keyframes techPattern {
     0% {
-        transform: translateX(-100px);
+        background-position: 0 0;
     }
     100% {
-        transform: translateX(100px);
+        background-position: 80px 80px;
     }
 }
 
@@ -445,19 +442,19 @@ header .container {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(0, 212, 170, 0.2) 0%, transparent 50%);
-    animation: heroGlow 15s ease-in-out infinite alternate;
+        radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 212, 170, 0.15) 0%, transparent 50%);
+    animation: heroTechGlow 18s ease-in-out infinite alternate;
 }
 
-@keyframes heroGlow {
+@keyframes heroTechGlow {
     0% {
-        opacity: 0.3;
-        transform: scale(1);
+        opacity: 0.4;
+        transform: scale(1) rotate(0deg);
     }
     100% {
-        opacity: 0.7;
-        transform: scale(1.1);
+        opacity: 0.8;
+        transform: scale(1.1) rotate(1deg);
     }
 }
 
@@ -572,30 +569,6 @@ header .container {
     background: linear-gradient(to bottom, var(--bg-primary), transparent);
 }
 
-#servicos::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(45deg, transparent 49%, rgba(255, 107, 53, 0.03) 50%, transparent 51%),
-        linear-gradient(-45deg, transparent 49%, rgba(0, 212, 170, 0.03) 50%, transparent 51%);
-    background-size: 40px 40px;
-    animation: servicesPattern 20s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes servicesPattern {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 40px 40px;
-    }
-}
-
 #servicos h2 {
     text-align: center;
     font-size: 3rem;
@@ -697,30 +670,6 @@ header .container {
     right: 0;
     height: 100px;
     background: linear-gradient(to bottom, var(--bg-secondary), transparent);
-}
-
-#depoimentos::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
-    animation: testimonialsGlow 12s ease-in-out infinite alternate;
-}
-
-@keyframes testimonialsGlow {
-    0% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0.7;
-        transform: scale(1.05);
-    }
 }
 
 #depoimentos h2 {
@@ -873,29 +822,6 @@ header .container {
     opacity: 0.3;
 }
 
-#cta-final::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%),
-        linear-gradient(-45deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%);
-    background-size: 60px 60px;
-    animation: ctaPattern 15s linear infinite;
-}
-
-@keyframes ctaPattern {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 60px 60px;
-    }
-}
-
 #cta-final .container {
     position: relative;
     z-index: 1;
@@ -922,27 +848,6 @@ footer {
     padding: 60px 0 30px;
     border-top: 1px solid var(--border-color);
     position: relative;
-}
-
-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.03) 25%, transparent 50%, rgba(0, 212, 170, 0.03) 75%, transparent 100%);
-    animation: footerShimmer 10s ease-in-out infinite;
-}
-
-@keyframes footerShimmer {
-    0%, 100% {
-        transform: translateX(-100%);
-    }
-    50% {
-        transform: translateX(100%);
-    }
 }
 
 .footer-content {

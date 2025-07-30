@@ -208,7 +208,7 @@ const initializeFadeInAnimations = () => {
   });
 };
 
-// Initialize tsParticles configuration with sophisticated color palette
+// Initialize tsParticles configuration with high-tech effects
 const initializeParticles = () => {
   if (typeof tsParticles === 'undefined') {
     console.warn('tsParticles not loaded');
@@ -219,7 +219,7 @@ const initializeParticles = () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return {
       background: isDark ? '#0a0a0a' : '#f8f9fa',
-      particles: isDark ? ['#FF6B35', '#FF8E53', '#00d4aa'] : ['#1a1a2e', '#16213e', '#0f3460'],
+      particles: isDark ? ['#FF6B35', '#FF8E53', '#00d4aa', '#533483'] : ['#1a1a2e', '#16213e', '#0f3460', '#533483'],
       links: isDark ? '#FF6B35' : '#533483',
       accent: isDark ? '#00d4aa' : '#FF6B35'
     };
@@ -239,7 +239,7 @@ const initializeParticles = () => {
     },
     particles: {
       number: {
-        value: 100,
+        value: 120,
         density: {
           enable: true,
           value_area: 800
@@ -249,14 +249,17 @@ const initializeParticles = () => {
         value: colors.particles
       },
       shape: {
-        type: ["circle", "triangle"],
+        type: ["circle", "triangle", "star"],
         stroke: {
           width: 0,
           color: "#000000"
+        },
+        polygon: {
+          nb_sides: 5
         }
       },
       opacity: {
-        value: 0.7,
+        value: 0.8,
         random: true,
         anim: {
           enable: true,
@@ -266,7 +269,7 @@ const initializeParticles = () => {
         }
       },
       size: {
-        value: 4,
+        value: 3,
         random: true,
         anim: {
           enable: true,
@@ -279,17 +282,17 @@ const initializeParticles = () => {
         enable: true,
         distance: 150,
         color: colors.links,
-        opacity: 0.5,
+        opacity: 0.6,
         width: 1,
         triangles: {
           enable: true,
           color: colors.accent,
-          opacity: 0.1
+          opacity: 0.15
         }
       },
       move: {
         enable: true,
-        speed: 2,
+        speed: 3,
         direction: "none",
         random: true,
         straight: false,
@@ -303,7 +306,7 @@ const initializeParticles = () => {
         },
         trail: {
           enable: true,
-          length: 10,
+          length: 15,
           fillColor: colors.background
         }
       },
@@ -320,7 +323,7 @@ const initializeParticles = () => {
       events: {
         onHover: {
           enable: true,
-          mode: ["repulse", "bubble"]
+          mode: ["repulse", "bubble", "connect"]
         },
         onClick: {
           enable: true,
@@ -338,6 +341,13 @@ const initializeParticles = () => {
           size: 40,
           duration: 2,
           opacity: 0.8
+        },
+        connect: {
+          distance: 80,
+          links: {
+            opacity: 0.5
+          },
+          radius: 60
         },
         push: {
           particles_nb: 4
@@ -448,7 +458,7 @@ const initializePulseAnimation = () => {
   });
 };
 
-// Add dynamic background effects
+// Add high-tech dynamic background effects
 const initializeDynamicBackgrounds = () => {
   // Add mouse tracking effect to hero section
   const hero = document.getElementById('hero');
@@ -487,7 +497,7 @@ const initializeDynamicBackgrounds = () => {
   });
 };
 
-// Add gradient animation effects
+// Add high-tech gradient animation effects
 const initializeGradientEffects = () => {
   // Create animated gradient overlays
   const gradientSections = document.querySelectorAll('.gradient-bg');
@@ -501,13 +511,13 @@ const initializeGradientEffects = () => {
       width: 100%;
       height: 100%;
       background: linear-gradient(45deg, 
-        rgba(255, 107, 53, 0.1) 0%, 
-        rgba(0, 212, 170, 0.1) 25%, 
-        rgba(83, 52, 131, 0.1) 50%, 
-        rgba(255, 142, 83, 0.1) 75%, 
-        rgba(255, 107, 53, 0.1) 100%);
+        rgba(255, 107, 53, 0.08) 0%, 
+        rgba(0, 212, 170, 0.08) 25%, 
+        rgba(83, 52, 131, 0.08) 50%, 
+        rgba(255, 142, 83, 0.08) 75%, 
+        rgba(255, 107, 53, 0.08) 100%);
       background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
+      animation: gradientShift 10s ease infinite;
       pointer-events: none;
       z-index: 0;
     `;
@@ -535,48 +545,52 @@ const initializeGradientEffects = () => {
   document.head.appendChild(gradientStyle);
 };
 
-// Add geometric pattern animation
-const initializeGeometricEffects = () => {
-  const geometricSections = document.querySelectorAll('.geometric-bg');
+// Add high-tech pattern animation
+const initializeTechEffects = () => {
+  const techSections = document.querySelectorAll('.tech-bg');
   
-  geometricSections.forEach(section => {
-    // Add floating geometric shapes
-    for (let i = 0; i < 5; i++) {
-      const shape = document.createElement('div');
-      shape.style.cssText = `
-        position: absolute;
-        width: ${20 + i * 10}px;
-        height: ${20 + i * 10}px;
-        background: ${i % 2 === 0 ? 'rgba(255, 107, 53, 0.1)' : 'rgba(0, 212, 170, 0.1)'};
-        border-radius: ${i % 2 === 0 ? '50%' : '0'};
-        animation: floatShape ${3 + i}s ease-in-out infinite;
-        animation-delay: ${i * 0.5}s;
-        pointer-events: none;
-        z-index: 0;
-      `;
-      
-      shape.style.left = `${Math.random() * 100}%`;
-      shape.style.top = `${Math.random() * 100}%`;
-      
-      section.appendChild(shape);
+  techSections.forEach(section => {
+    // Add tech grid overlay
+    const gridOverlay = document.createElement('div');
+    gridOverlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: techGridMove 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    `;
+    
+    section.style.position = 'relative';
+    section.appendChild(gridOverlay);
+    
+    // Ensure content stays above overlay
+    const content = section.querySelector('.container');
+    if (content) {
+      content.style.position = 'relative';
+      content.style.zIndex = '1';
     }
   });
   
-  // Add floating shape animation
-  const shapeStyle = document.createElement('style');
-  shapeStyle.textContent = `
-    @keyframes floatShape {
-      0%, 100% { 
-        transform: translateY(0px) rotate(0deg); 
-        opacity: 0.3;
+  // Add tech grid animation
+  const techStyle = document.createElement('style');
+  techStyle.textContent = `
+    @keyframes techGridMove {
+      0% {
+        background-position: 0 0;
       }
-      50% { 
-        transform: translateY(-20px) rotate(180deg); 
-        opacity: 0.7;
+      100% {
+        background-position: 50px 50px;
       }
     }
   `;
-  document.head.appendChild(shapeStyle);
+  document.head.appendChild(techStyle);
 };
 
 // Main initialization function
@@ -593,7 +607,7 @@ const initializeApp = () => {
   initializePulseAnimation();
   initializeDynamicBackgrounds();
   initializeGradientEffects();
-  initializeGeometricEffects();
+  initializeTechEffects();
 };
 
 // Initialize when DOM is ready
