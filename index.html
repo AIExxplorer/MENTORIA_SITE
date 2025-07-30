@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +29,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="src/css/style.css">
 
     <div id="particles-js"></div>
+
+    <!-- Contact Button -->
+    <button class="contact-button" id="contact-button">
+        <div class="icon">
+            <i class="fas fa-comments"></i>
+        </div>
+        Fale Conosco
+    </button>
 
     <header>
         <div class="container">
@@ -43,11 +54,17 @@
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato" class="cta-button-outline">Contato</a>
             </nav>
-            <button class="hamburger" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-sun icon"></i>
+                    <span>Claro</span>
+                </button>
+                <button class="hamburger" id="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -86,17 +103,64 @@
         <section id="depoimentos">
             <div class="container">
                 <h2 class="fade-in">Quem Confia, Recomenda</h2>
-                <div class="depoimento-card fade-in">
-                    <blockquote>
-                        "A parceria com a Foco Digital foi um divisor de águas para nossa empresa. Em 3 meses, nossas vendas online dobraram. Profissionalismo e resultados incríveis!"
-                    </blockquote>
-                    <cite>– João da Silva, CEO da Empresa Exemplo</cite>
-                </div>
-                 <div class="depoimento-card fade-in">
-                    <blockquote>
-                        "Finalmente encontramos uma agência que entende do nosso negócio e entrega o que promete. Recomendo de olhos fechados!"
-                    </blockquote>
-                    <cite>– Maria Oliveira, Diretora da Loja Y</cite>
+                <div class="testimonials-carousel">
+                    <div class="testimonials-container" id="testimonials-container">
+                        <div class="testimonial-slide">
+                            <div class="depoimento-card fade-in">
+                                <blockquote>
+                                    "A parceria com a Foco Digital foi um divisor de águas para nossa empresa. Em 3 meses, nossas vendas online dobraram. Profissionalismo e resultados incríveis!"
+                                </blockquote>
+                                <cite>– João da Silva, CEO da Empresa Exemplo</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="depoimento-card fade-in">
+                                <blockquote>
+                                    "Finalmente encontramos uma agência que entende do nosso negócio e entrega o que promete. Recomendo de olhos fechados!"
+                                </blockquote>
+                                <cite>– Maria Oliveira, Diretora da Loja Y</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="depoimento-card fade-in">
+                                <blockquote>
+                                    "A equipe da Foco Digital é incrível! Eles não só aumentaram nosso tráfego em 300%, mas também melhoraram significativamente nossa taxa de conversão."
+                                </blockquote>
+                                <cite>– Carlos Mendes, Fundador da Startup Tech</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="depoimento-card fade-in">
+                                <blockquote>
+                                    "Investimento que valeu cada centavo! Em 6 meses, nosso ROI foi de 450%. A Foco Digital realmente entende de resultados."
+                                </blockquote>
+                                <cite>– Ana Paula Santos, Gerente de Marketing</cite>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="depoimento-card fade-in">
+                                <blockquote>
+                                    "Profissionalismo, transparência e resultados. A Foco Digital transformou nossa presença digital e hoje somos referência no mercado."
+                                </blockquote>
+                                <cite>– Roberto Lima, Diretor Comercial</cite>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn" id="prev-btn" aria-label="Depoimento anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn" id="next-btn" aria-label="Próximo depoimento">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="carousel-indicators" id="carousel-indicators">
+                        <div class="carousel-indicator active" data-slide="0"></div>
+                        <div class="carousel-indicator" data-slide="1"></div>
+                        <div class="carousel-indicator" data-slide="2"></div>
+                        <div class="carousel-indicator" data-slide="3"></div>
+                        <div class="carousel-indicator" data-slide="4"></div>
+                    </div>
                 </div>
             </div>
         </section>

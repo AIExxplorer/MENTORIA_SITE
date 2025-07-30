@@ -1,7 +1,155 @@
 /**
  * Foco Digital Website - Main JavaScript Module
- * Handles mobile menu, animations, and particle effects
+ * Handles mobile menu, animations, particle effects, theme toggle, contact button, and testimonials carousel
  */
+
+// Theme management
+const initializeThemeToggle = () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const icon = themeToggle?.querySelector('.icon');
+  const text = themeToggle?.querySelector('span');
+
+  if (!themeToggle) {
+    console.warn('Theme toggle not found');
+    return;
+  }
+
+  // Load saved theme from localStorage
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeUI(savedTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeUI(newTheme);
+  });
+
+  function updateThemeUI(theme) {
+    if (icon) {
+      icon.className = theme === 'light' ? 'fas fa-moon icon' : 'fas fa-sun icon';
+    }
+    if (text) {
+      text.textContent = theme === 'light' ? 'Escuro' : 'Claro';
+    }
+  }
+};
+
+// Contact button functionality
+const initializeContactButton = () => {
+  const contactButton = document.getElementById('contact-button');
+
+  if (!contactButton) {
+    console.warn('Contact button not found');
+    return;
+  }
+
+  contactButton.addEventListener('click', () => {
+    // You can customize this to open a chat widget, WhatsApp, or contact form
+    const phoneNumber = '5531999999999';
+    const message = 'Olá! Gostaria de saber mais sobre os serviços da Foco Digital.';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Alternative: Show a contact modal or redirect to contact section
+    // document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+  });
+};
+
+// Testimonials carousel functionality
+const initializeTestimonialsCarousel = () => {
+  const container = document.getElementById('testimonials-container');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const indicators = document.querySelectorAll('.carousel-indicator');
+
+  if (!container || !prevBtn || !nextBtn) {
+    console.warn('Carousel elements not found');
+    return;
+  }
+
+  let currentSlide = 0;
+  const slides = container.querySelectorAll('.testimonial-slide');
+  const totalSlides = slides.length;
+
+  function updateCarousel() {
+    const translateX = -currentSlide * 100;
+    container.style.transform = `translateX(${translateX}%)`;
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update button states
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === totalSlides - 1;
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      updateCarousel();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateCarousel();
+    }
+  }
+
+  function goToSlide(slideIndex) {
+    if (slideIndex >= 0 && slideIndex < totalSlides) {
+      currentSlide = slideIndex;
+      updateCarousel();
+    }
+  }
+
+  // Event listeners
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => goToSlide(index));
+  });
+
+  // Auto-play carousel
+  let autoPlayInterval;
+  
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+      if (currentSlide < totalSlides - 1) {
+        nextSlide();
+      } else {
+        currentSlide = 0;
+        updateCarousel();
+      }
+    }, 5000); // Change slide every 5 seconds
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+    }
+  }
+
+  // Start auto-play and handle pause on hover
+  startAutoPlay();
+  
+  container.addEventListener('mouseenter', stopAutoPlay);
+  container.addEventListener('mouseleave', startAutoPlay);
+
+  // Initialize carousel state
+  updateCarousel();
+};
 
 // Mobile menu functionality
 const initializeMobileMenu = () => {
@@ -57,19 +205,29 @@ const initializeFadeInAnimations = () => {
   });
 };
 
-// Initialize tsParticles configuration
+// Initialize tsParticles configuration with theme-aware colors
 const initializeParticles = () => {
   if (typeof tsParticles === 'undefined') {
     console.warn('tsParticles not loaded');
     return;
   }
 
+  const getThemeColors = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      background: isDark ? '#1a1a1a' : '#f7f7f7',
+      particles: isDark ? '#ffffff' : '#213649',
+      links: isDark ? '#ffffff' : '#213649'
+    };
+  };
+
+  const colors = getThemeColors();
+
   const particlesConfig = {
     background: {
       color: {
-        value: '#213649' // Main background color
-      },
-      image: 'linear-gradient(135deg, #213649 0%, #2E4A69 100%)' // Site gradient
+        value: colors.background
+      }
     },
     fullScreen: {
       enable: true,
@@ -77,68 +235,114 @@ const initializeParticles = () => {
     },
     particles: {
       number: {
-        value: 60, // Number of particles
+        value: 80, // Increased number of particles
         density: {
           enable: true,
+          value_area: 800
         }
       },
       color: {
-        value: "#ffffff" // Particle color
+        value: colors.particles
       },
       shape: {
         type: "circle"
       },
       opacity: {
-        value: 0.5
+        value: 0.6,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
       },
       size: {
-        value: 2 // Particle size
+        value: 3,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 2,
+          size_min: 0.1,
+          sync: false
+        }
       },
-      links: { // Former 'line_linked'
+      links: {
         enable: true,
-        distance: 150, // Distance to create a line
-        color: "#ffffff", // Line color
+        distance: 150,
+        color: colors.links,
         opacity: 0.4,
         width: 1
       },
       move: {
         enable: true,
-        speed: 2, // Movement speed
+        speed: 1.5,
         direction: "none",
-        outModes: { // Former 'out_mode'
-          default: "out"
+        random: true,
+        straight: false,
+        outModes: {
+          default: "bounce"
+        },
+        attract: {
+          enable: true,
+          rotateX: 600,
+          rotateY: 1200
         }
       }
     },
     interactivity: {
+      detect_on: "canvas",
       events: {
-        onHover: { // Former 'onhover'
+        onHover: {
           enable: true,
           mode: "repulse"
         },
-        onClick: { // Former 'onclick'
+        onClick: {
           enable: true,
           mode: "push"
-        }
+        },
+        resize: true
       },
       modes: {
         repulse: {
-          distance: 100
+          distance: 100,
+          duration: 0.4
         },
         push: {
-          quantity: 4 // Former 'particles_nb'
+          particles_nb: 4
         }
       }
-    }
+    },
+    retina_detect: true
   };
 
   tsParticles.load('particles-js', particlesConfig);
 };
 
+// Smooth scrolling for anchor links
+const initializeSmoothScrolling = () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+};
+
 // Main initialization function
 const initializeApp = () => {
+  initializeThemeToggle();
+  initializeContactButton();
+  initializeTestimonialsCarousel();
   initializeMobileMenu();
   initializeFadeInAnimations();
+  initializeSmoothScrolling();
 };
 
 // Initialize when DOM is ready
@@ -149,5 +353,12 @@ window.addEventListener('load', initializeParticles);
 
 // Export for testing
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { initializeApp, initializeMobileMenu, initializeFadeInAnimations };
+  module.exports = { 
+    initializeApp, 
+    initializeMobileMenu, 
+    initializeFadeInAnimations,
+    initializeThemeToggle,
+    initializeContactButton,
+    initializeTestimonialsCarousel
+  };
 }
