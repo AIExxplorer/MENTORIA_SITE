@@ -27,6 +27,9 @@ const initializeThemeToggle = () => {
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeUI(newTheme);
+    
+    // Reinitialize particles with new theme colors
+    initializeParticles();
   });
 
   function updateThemeUI(theme) {
@@ -205,7 +208,7 @@ const initializeFadeInAnimations = () => {
   });
 };
 
-// Initialize tsParticles configuration with theme-aware colors
+// Initialize tsParticles configuration with sophisticated color palette
 const initializeParticles = () => {
   if (typeof tsParticles === 'undefined') {
     console.warn('tsParticles not loaded');
@@ -215,9 +218,10 @@ const initializeParticles = () => {
   const getThemeColors = () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return {
-      background: isDark ? '#1a1a1a' : '#f7f7f7',
-      particles: isDark ? '#ffffff' : '#213649',
-      links: isDark ? '#ffffff' : '#213649'
+      background: isDark ? '#0a0a0a' : '#f8f9fa',
+      particles: isDark ? ['#FF6B35', '#FF8E53', '#00d4aa'] : ['#1a1a2e', '#16213e', '#0f3460'],
+      links: isDark ? '#FF6B35' : '#533483',
+      accent: isDark ? '#00d4aa' : '#FF6B35'
     };
   };
 
@@ -231,11 +235,11 @@ const initializeParticles = () => {
     },
     fullScreen: {
       enable: true,
-      zIndex: -1 // Ensure it stays in background
+      zIndex: -1
     },
     particles: {
       number: {
-        value: 80, // Increased number of particles
+        value: 100,
         density: {
           enable: true,
           value_area: 800
@@ -245,10 +249,14 @@ const initializeParticles = () => {
         value: colors.particles
       },
       shape: {
-        type: "circle"
+        type: ["circle", "triangle"],
+        stroke: {
+          width: 0,
+          color: "#000000"
+        }
       },
       opacity: {
-        value: 0.6,
+        value: 0.7,
         random: true,
         anim: {
           enable: true,
@@ -258,7 +266,7 @@ const initializeParticles = () => {
         }
       },
       size: {
-        value: 3,
+        value: 4,
         random: true,
         anim: {
           enable: true,
@@ -271,12 +279,17 @@ const initializeParticles = () => {
         enable: true,
         distance: 150,
         color: colors.links,
-        opacity: 0.4,
-        width: 1
+        opacity: 0.5,
+        width: 1,
+        triangles: {
+          enable: true,
+          color: colors.accent,
+          opacity: 0.1
+        }
       },
       move: {
         enable: true,
-        speed: 1.5,
+        speed: 2,
         direction: "none",
         random: true,
         straight: false,
@@ -287,7 +300,19 @@ const initializeParticles = () => {
           enable: true,
           rotateX: 600,
           rotateY: 1200
+        },
+        trail: {
+          enable: true,
+          length: 10,
+          fillColor: colors.background
         }
+      },
+      life: {
+        duration: {
+          sync: false,
+          value: 20
+        },
+        count: 1
       }
     },
     interactivity: {
@@ -295,7 +320,7 @@ const initializeParticles = () => {
       events: {
         onHover: {
           enable: true,
-          mode: "repulse"
+          mode: ["repulse", "bubble"]
         },
         onClick: {
           enable: true,
@@ -308,12 +333,39 @@ const initializeParticles = () => {
           distance: 100,
           duration: 0.4
         },
+        bubble: {
+          distance: 200,
+          size: 40,
+          duration: 2,
+          opacity: 0.8
+        },
         push: {
           particles_nb: 4
         }
       }
     },
-    retina_detect: true
+    retina_detect: true,
+    fps_limit: 60,
+    emitters: {
+      direction: "top",
+      life: {
+        count: 0,
+        duration: 0.1,
+        delay: 0.1
+      },
+      rate: {
+        delay: 0.15,
+        quantity: 1
+      },
+      size: {
+        width: 100,
+        height: 10
+      },
+      position: {
+        y: 100,
+        x: 50
+      }
+    }
   };
 
   tsParticles.load('particles-js', particlesConfig);
@@ -335,14 +387,79 @@ const initializeSmoothScrolling = () => {
   });
 };
 
+// Add parallax effect to hero section
+const initializeParallaxEffect = () => {
+  const hero = document.getElementById('hero');
+  
+  if (!hero) return;
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    hero.style.transform = `translateY(${rate}px)`;
+  });
+};
+
+// Add floating animation to service cards
+const initializeFloatingAnimation = () => {
+  const serviceCards = document.querySelectorAll('.servico-card');
+  
+  serviceCards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.2}s`;
+    card.classList.add('floating');
+  });
+};
+
+// Add CSS for floating animation
+const addFloatingCSS = () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    .floating:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  `;
+  document.head.appendChild(style);
+};
+
+// Add pulse animation to CTA buttons
+const initializePulseAnimation = () => {
+  const ctaButtons = document.querySelectorAll('.cta-button');
+  
+  ctaButtons.forEach(button => {
+    button.classList.add('pulse');
+  });
+};
+
 // Main initialization function
 const initializeApp = () => {
+  addFloatingCSS();
   initializeThemeToggle();
   initializeContactButton();
   initializeTestimonialsCarousel();
   initializeMobileMenu();
   initializeFadeInAnimations();
   initializeSmoothScrolling();
+  initializeParallaxEffect();
+  initializeFloatingAnimation();
+  initializePulseAnimation();
 };
 
 // Initialize when DOM is ready
