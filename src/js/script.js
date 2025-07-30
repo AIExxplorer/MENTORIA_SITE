@@ -208,7 +208,7 @@ const initializeFadeInAnimations = () => {
   });
 };
 
-// Initialize tsParticles configuration with high-tech effects
+// Initialize tsParticles configuration with high-tech effects (no blue)
 const initializeParticles = () => {
   if (typeof tsParticles === 'undefined') {
     console.warn('tsParticles not loaded');
@@ -219,7 +219,7 @@ const initializeParticles = () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return {
       background: isDark ? '#0a0a0a' : '#f8f9fa',
-      particles: isDark ? ['#FF6B35', '#FF8E53', '#00d4aa', '#533483'] : ['#1a1a2e', '#16213e', '#0f3460', '#533483'],
+      particles: isDark ? ['#FF6B35', '#FF8E53', '#00d4aa', '#533483'] : ['#2c2c2c', '#404040', '#FF6B35', '#533483'],
       links: isDark ? '#FF6B35' : '#533483',
       accent: isDark ? '#00d4aa' : '#FF6B35'
     };

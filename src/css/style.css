@@ -23,7 +23,7 @@
     --shadow: 0 2px 20px rgba(0,0,0,0.08);
     --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
     --gradient-primary: linear-gradient(135deg, var(--laranja-destaque), var(--laranja-secundario));
-    --gradient-secondary: linear-gradient(135deg, var(--azul-escuro), var(--roxo-escuro));
+    --gradient-secondary: linear-gradient(135deg, #2c2c2c, #404040);
     --gradient-accent: linear-gradient(135deg, var(--verde-accent), #00b894);
 }
 
@@ -38,7 +38,7 @@
     --shadow: 0 2px 20px rgba(0,0,0,0.3);
     --shadow-hover: 0 8px 40px rgba(0,0,0,0.4);
     --gradient-primary: linear-gradient(135deg, var(--laranja-destaque), var(--laranja-secundario));
-    --gradient-secondary: linear-gradient(135deg, var(--azul-claro), var(--roxo-claro));
+    --gradient-secondary: linear-gradient(135deg, #404040, #2c2c2c);
     --gradient-accent: linear-gradient(135deg, var(--verde-accent), #00b894);
 }
 
@@ -127,7 +127,7 @@ body::after {
     height: 100vh;
     z-index: -3;
     pointer-events: none;
-    background: var(--gradient-secondary);
+    background: transparent;
 }
 
 /* --- HIGH-TECH GRADIENT BACKGROUNDS --- */
