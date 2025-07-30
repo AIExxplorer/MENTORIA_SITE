@@ -29,5 +29,5 @@ jobs:
       run: npm outdated || true
       
     - name: Run Dependabot check
-      uses: actions/dependency-review-action@v3
+      uses: actions/dependency-review-action@v4
       if: github.event_name == 'pull_request' 
